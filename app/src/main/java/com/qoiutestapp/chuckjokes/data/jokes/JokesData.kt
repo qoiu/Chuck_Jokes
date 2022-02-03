@@ -11,7 +11,7 @@ sealed class JokesData : Abstract.DataObject {
         val type: String,
         val value: List<JokeCloud>
     ) : JokesData() {
-        override fun <T> map(mapper: JokesDataToDomainMapper<T>) = mapper.map(this)
+        override fun <T> map(mapper: JokesDataToDomainMapper<T>) = mapper.map(value)
     }
 
     data class JokeCloud(

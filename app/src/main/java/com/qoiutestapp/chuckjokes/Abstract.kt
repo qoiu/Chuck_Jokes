@@ -3,7 +3,7 @@ package com.qoiutestapp.chuckjokes
 import java.lang.Exception
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-
+import com.qoiutestapp.chuckjokes.domain.JokesDomain
 
 abstract class Abstract {
 
@@ -16,6 +16,10 @@ abstract class Abstract {
 
         interface DataToDomain<I, O> : Data<I, O> {
             fun map(e: Exception): O
+        }
+
+        interface DomainToUi<S, T> : Data<S, T> {
+            fun map(errorType: JokesDomain.ErrorType): T
         }
     }
 

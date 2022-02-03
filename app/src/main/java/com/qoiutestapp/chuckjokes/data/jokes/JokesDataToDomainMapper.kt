@@ -7,11 +7,11 @@ import retrofit2.HttpException
 import java.lang.Exception
 import java.net.UnknownHostException
 
-interface JokesDataToDomainMapper<T> : Abstract.Mapper.DataToDomain<JokesData.JokesResult, T> {
+interface JokesDataToDomainMapper<T> : Abstract.Mapper.DataToDomain<List<JokesData.JokeCloud>, T> {
     class Base : JokesDataToDomainMapper<JokesDomain> {
 
-        override fun map(data: JokesData.JokesResult): JokesDomain =
-            JokesDomain.Success(data.value.map { it.joke })
+        override fun map(data: List<JokesData.JokeCloud>): JokesDomain =
+            JokesDomain.Success(data.map { it.joke })
 
         override fun map(e: Exception) = JokesDomain.Error(
             when (e) {
