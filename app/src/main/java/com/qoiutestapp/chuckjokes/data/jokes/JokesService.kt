@@ -6,5 +6,5 @@ import retrofit2.http.Path
 interface JokesService {
 
     @GET("random/{amount}")
-    suspend fun fetchJokes(@Path("amount")amount: Int): JokesResult
+    suspend fun fetchRandomJokes(@Path("amount")amount: Int): JokesData.JokesResult
 }
