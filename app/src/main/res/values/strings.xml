@@ -2,4 +2,8 @@
     <string name="app_name">Chuck Jokes</string>
     <string name="title_jokes">Jokes</string>
     <string name="title_web">Web</string>
+    <string name="reload">RELOAD</string>
+    <string name="hint_count">Count</string>
+    <string name="incorrect_number_format">Incorrect count amount</string>
+    <string name="negative_number">Count should be positive</string>
 </resources>
