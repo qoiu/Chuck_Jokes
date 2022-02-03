@@ -16,7 +16,7 @@ interface Communication<T : Any> : Abstract.Observe<T> {
         }
 
         override fun post(data: T) {
-            liveData.postValue(data)
+            liveData.value = data
         }
     }
 }
