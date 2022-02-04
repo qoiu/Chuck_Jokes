@@ -9,7 +9,7 @@ sealed class JokesUi {
         val jokes: List<String>
     ) : JokesUi()
 
-    class Error(val e: String) : JokesUi()
+    data class Error(val e: String) : JokesUi()
 
     object Progress : JokesUi() {
         override fun progressVisibility() = View.VISIBLE

@@ -9,6 +9,7 @@ import com.qoiutestapp.chuckjokes.domain.JokeDomainMapper
 import com.qoiutestapp.chuckjokes.domain.JokesDomain
 import com.qoiutestapp.chuckjokes.domain.JokesInteractor
 import com.qoiutestapp.chuckjokes.domain.Repository
+import com.qoiutestapp.chuckjokes.presentation.ui.jokes.CommunicationJokes
 import com.qoiutestapp.chuckjokes.presentation.ui.jokes.JokesDomainToUiMapper
 import com.qoiutestapp.chuckjokes.presentation.ui.jokes.JokesUi
 import com.qoiutestapp.chuckjokes.presentation.ui.jokes.JokesViewModel
@@ -27,12 +28,12 @@ class JokesApp : Application() {
         super.onCreate()
 
         val jokesModule = module {
-            single <Abstract.StringProvider>{ StringResources(this@JokesApp) }
-            single <Repository<JokesData>>{ BaseJokesRepository(configRetrofit()) }
-            single <JokesDataToDomainMapper<JokesDomain>>{ JokesDataToDomainMapper.Base() }
-            single <JokeDomainMapper<JokesUi>>{ JokesDomainToUiMapper(get()) }
-            single <JokesInteractor>{ JokesInteractor.Base(get(),get()) }
-            viewModel { JokesViewModel(get(),get(),get()) }
+            single<Abstract.StringProvider> { StringResources(this@JokesApp) }
+            single<Repository<JokesData>> { BaseJokesRepository(configRetrofit()) }
+            single<JokesDataToDomainMapper<JokesDomain>> { JokesDataToDomainMapper.Base() }
+            single<JokeDomainMapper<JokesUi>> { JokesDomainToUiMapper(get()) }
+            single<JokesInteractor> { JokesInteractor.Base(get(), get()) }
+            viewModel { JokesViewModel(get(), get(), get(), CommunicationJokes()) }
         }
 
         startKoin {

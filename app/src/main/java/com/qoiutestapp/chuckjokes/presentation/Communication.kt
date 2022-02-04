@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.qoiutestapp.chuckjokes.Abstract
+import java.lang.IllegalStateException
 
 interface Communication<T : Any> : Abstract.Observe<T> {
 
@@ -16,7 +17,18 @@ interface Communication<T : Any> : Abstract.Observe<T> {
         }
 
         override fun post(data: T) {
-            liveData.value = data
+            liveData.postValue(data)
+        }
+    }
+
+    class Test<T : Any>(private val action: (T) -> Unit) : Communication<T> {
+
+        override fun observe(owner: LifecycleOwner, observer: Observer<T>) {
+            throw IllegalStateException("Not supported in test")
+        }
+
+        override fun post(data: T) {
+            action(data)
         }
     }
 }
