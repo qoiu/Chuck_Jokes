@@ -14,8 +14,9 @@ import kotlinx.coroutines.withContext
 class JokesViewModel(
     private val stringProvider: Abstract.StringProvider,
     private val interactor: JokesInteractor,
-    private val jokesDomainToUiMapper: JokeDomainMapper<JokesUi>
-) : BaseViewModel<Communication.Base<JokesUi>, JokesUi>(CommunicationJokes()),
+    private val jokesDomainToUiMapper: JokeDomainMapper<JokesUi>,
+    communication: Communication<JokesUi>
+) : BaseViewModel<Communication.Base<JokesUi>, JokesUi>(communication),
     Abstract.FetchAmount {
 
     override fun fetch(count: String) {
