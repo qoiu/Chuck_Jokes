@@ -25,7 +25,7 @@ class JokesFragment : BaseFragment<FragmentJokesBinding>() {
         jokesViewModel.observe(this, {
             binding.jokesProgress.visibility = it.progressVisibility()
             when (it) {
-                is JokesUi.Error -> Toast.makeText(requireContext(), it.e, Toast.LENGTH_LONG).show()
+                is JokesUi.Error -> Toast.makeText(requireContext(), it.e, Toast.LENGTH_SHORT).show()
                 is JokesUi.Success -> adapter.update(it.jokes)
                 is JokesUi.Progress -> binding.jokesProgress.visibility = View.VISIBLE
             }
