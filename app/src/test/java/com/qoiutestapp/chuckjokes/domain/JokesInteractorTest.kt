@@ -9,7 +9,7 @@ import org.junit.Test
 class JokesInteractorTest {
 
 
-    private val mapper = JokesDataToDomainMapper.Base()
+    private val mapper = JokesDataToDomainMapper()
 
     @Test
     fun success() = runBlockingTest {

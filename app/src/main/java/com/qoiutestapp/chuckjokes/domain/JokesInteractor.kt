@@ -8,7 +8,7 @@ interface JokesInteractor {
     suspend fun fetchJokes(amount: Int): JokesDomain
     class Base(
         private val repository: Repository<JokesData>,
-        private val mapper: JokesDataToDomainMapper<JokesDomain>
+        private val mapper: JokesDataToDomainMapper
     ) : JokesInteractor {
         override suspend fun fetchJokes(amount: Int): JokesDomain =
             repository.fetchData(amount).map(mapper)
