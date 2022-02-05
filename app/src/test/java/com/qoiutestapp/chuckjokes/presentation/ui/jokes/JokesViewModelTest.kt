@@ -8,11 +8,12 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class JokesViewModelTest {
+    private val format = HtmlFormatToString.Empty()
 
     @Test
     fun incorrectCount() {
         val string = TestStringProvider("error")
-        val mapper = JokesDomainToUiMapper(string)
+        val mapper = JokesDomainToUiMapper(string,format)
         val result = JokesDomain.Success(listOf("test1"))
         val expected = mutableListOf<JokesUi>()
         val communication = Communication.Test<JokesUi> {
@@ -27,7 +28,7 @@ class JokesViewModelTest {
     @Test
     fun negativeCount() {
         val string = TestStringProvider("less than 0")
-        val mapper = JokesDomainToUiMapper(string)
+        val mapper = JokesDomainToUiMapper(string,format)
         val result = JokesDomain.Success(listOf("test1"))
         val expected = mutableListOf<JokesUi>()
         val communication = Communication.Test<JokesUi> {
