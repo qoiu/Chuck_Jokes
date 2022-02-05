@@ -11,46 +11,46 @@ import retrofit2.Response
 import java.lang.IllegalStateException
 import java.net.UnknownHostException
 
-class JokesDataToDomainMapperTest{
+class JokesDataToDomainMapperTest {
 
     @Test
-    fun success(){
+    fun success() {
         val joke = "Chuck Norris is the reason why Waldo is hiding."
-        val expected =  JokesDomain.Success(listOf(joke))
-        val jokesData = JokesData.JokesResult("success", listOf(JokesData.JokeCloud(1,joke)))
-        val actual = jokesData.map(JokesDataToDomainMapper.Base())
+        val expected = JokesDomain.Success(listOf(joke))
+        val jokesData = JokesData.JokesResult("success", listOf(JokesData.JokeCloud(1, joke)))
+        val actual = jokesData.map(JokesDataToDomainMapper())
         assertEquals(expected, actual)
     }
 
     @Test
-    fun errorGeneric(){
+    fun errorGeneric() {
         val error = IllegalStateException()
         val jokesData = JokesData.Fail(error)
         val expected = JokesDomain.Error(JokesDomain.ErrorType.GENERIC_ERROR)
-        val actual = jokesData.map(JokesDataToDomainMapper.Base())
+        val actual = jokesData.map(JokesDataToDomainMapper())
         assertEquals(expected, actual)
     }
 
     @Test
-    fun errorHostException(){
+    fun errorHostException() {
         val error = UnknownHostException()
         val jokesData = JokesData.Fail(error)
         val expected = JokesDomain.Error(JokesDomain.ErrorType.NO_CONNECTION)
-        val actual = jokesData.map(JokesDataToDomainMapper.Base())
+        val actual = jokesData.map(JokesDataToDomainMapper())
         assertEquals(expected, actual)
     }
 
     @Test
-    fun errorHtttp(){
-        val response = Response.error<String>(400,MockResponseBody())
+    fun errorHttp() {
+        val response = Response.error<String>(400, MockResponseBody())
         val error = HttpException(response)
         val jokesData = JokesData.Fail(error)
         val expected = JokesDomain.Error(JokesDomain.ErrorType.SERVICE_UNAVAILABLE)
-        val actual = jokesData.map(JokesDataToDomainMapper.Base())
+        val actual = jokesData.map(JokesDataToDomainMapper())
         assertEquals(expected, actual)
     }
 
-    private inner class MockResponseBody() : ResponseBody(){
+    private inner class MockResponseBody : ResponseBody() {
         override fun contentLength(): Long = 400
 
         override fun contentType(): MediaType? = null

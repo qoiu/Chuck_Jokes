@@ -6,13 +6,9 @@ import com.qoiutestapp.chuckjokes.data.jokes.JokesData
 import com.qoiutestapp.chuckjokes.data.jokes.JokesDataToDomainMapper
 import com.qoiutestapp.chuckjokes.data.jokes.JokesService
 import com.qoiutestapp.chuckjokes.domain.JokeDomainMapper
-import com.qoiutestapp.chuckjokes.domain.JokesDomain
 import com.qoiutestapp.chuckjokes.domain.JokesInteractor
 import com.qoiutestapp.chuckjokes.domain.Repository
-import com.qoiutestapp.chuckjokes.presentation.ui.jokes.CommunicationJokes
-import com.qoiutestapp.chuckjokes.presentation.ui.jokes.JokesDomainToUiMapper
-import com.qoiutestapp.chuckjokes.presentation.ui.jokes.JokesUi
-import com.qoiutestapp.chuckjokes.presentation.ui.jokes.JokesViewModel
+import com.qoiutestapp.chuckjokes.presentation.ui.jokes.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -30,8 +26,8 @@ class JokesApp : Application() {
         val jokesModule = module {
             single<Abstract.StringProvider> { StringResources(this@JokesApp) }
             single<Repository<JokesData>> { BaseJokesRepository(configRetrofit()) }
-            single<JokesDataToDomainMapper<JokesDomain>> { JokesDataToDomainMapper.Base() }
-            single<JokeDomainMapper<JokesUi>> { JokesDomainToUiMapper(get()) }
+            single { JokesDataToDomainMapper() }
+            single<JokeDomainMapper<JokesUi>> { JokesDomainToUiMapper(get(),HtmlFormatToString.Base()) }
             single<JokesInteractor> { JokesInteractor.Base(get(), get()) }
             viewModel { JokesViewModel(get(), get(), get(), CommunicationJokes()) }
         }
